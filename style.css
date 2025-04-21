@@ -230,7 +230,7 @@ button{user-select: none;}
     backdrop-filter: blur(0.5em);
 }
 #menu.open{
-    height: 5em;
+    height: 6em;
     opacity: 1;
     pointer-events: all;
 }
