@@ -1,0 +1,104 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>HTML Table Generator</title>
+    <script src="https://kit.fontawesome.com/108c7db30d.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div style="text-align: center;"><h2 id="title">HTML Table Generator</h2></div>
+
+    <div id="menuframe">
+        <div style="text-align: right; pointer-events: none;"><span id="more" onclick="more()"><i class="fa-solid fa-chevron-down" id="moreicon" title="Menu"></i></span></div>
+        <div id="menu">
+            <div>
+                <span id="morejson">My other projects</span><br><br>
+                <a href="https://e1ekk.github.io/art-showcase/">Elek's Forza Horizon Art Showcase</a><br>
+                <a href="https://e1ekk.github.io/fh5-randomizer/">Forza Horizon 5 Race Route Randomizer</a>
+            </div>
+        </div>
+    </div>
+    <div id="menuclose" onclick="more()"></div>
+
+    <h3>Cells<hr style="position: relative; bottom: 10px;"></h3>
+
+    <table id="table2">
+        <tr>
+            <td style="border: 0; width: 156px; padding: 0; border-right: 1px solid #29343f;">
+                Number of columns:<br>
+                <input type="number" placeholder="#" id="col" onkeyup="generate()"><button onclick="colup()" style="padding: 7px; width: 31px; margin-left: 7px;" id="plusminus"><i class="fa-solid fa-plus"></i></button><button onclick="coldown()" style="padding: 7px; width: 31px; margin-left: 7px;" id="plusminus"><i class="fa-solid fa-minus"></i></button>
+            </td>
+            <td style="border: 0; width: 170px; padding: 0; padding-left: 10px;">
+                Number of rows:<br>
+                <input type="number" placeholder="#" id="row" onkeyup="generate()"><button onclick="rowup()" style="padding: 7px; width: 31px; margin-left: 7px;" id="plusminus"><i class="fa-solid fa-plus"></i></button><button onclick="rowdown()" style="padding: 7px; width: 31px; margin-left: 7px;" id="plusminus"><i class="fa-solid fa-minus"></i></button>
+            </td>
+        </tr>
+    </table>
+
+    <p style="color: #da0000;" hidden id="range">Enter a value from 1 to 100</p>
+
+    <p><label for="thx" style="margin-right: 7px;"><i class="fa-solid fa-arrows-left-right"></i> Column headers<input type="checkbox" id="thx" onchange="generate()"></label><label for="thy"><i class="fa-solid fa-arrows-up-down"></i> Row headers<input type="checkbox" id="thy" onchange="generate()"></label></p>
+
+    <table id="table2">
+        <tr>
+            <td style="border: 0; width: 46px; padding: 0;">
+                <label for="widthenable" style="margin-right: 7px;"><i class="fa-solid fa-check"></i><input type="checkbox" id="widthenable" onchange="generate(), widthenable()"></label>
+            </td>
+            <td style="border: 0; width: 201px; padding: 0; border-right: 1px solid #29343f;">
+                Width:<br>
+                <input type="number" id="cellwidth" style="border-radius: 8px 0 0 8px;" placeholder="#" disabled onkeyup="generate()"><span id="px2">px</span><button onclick="widthup(), generate()" style="padding: 7px; width: 31px; margin-left: 7px; color: #b6b9bb;" id="widthup" disabled><i class="fa-solid fa-plus"></i></button><button onclick="widthdown(), generate()" style="padding: 7px; width: 31px; margin-left: 7px; color: #b6b9bb;" id="widthdown" disabled><i class="fa-solid fa-minus"></i></button>
+            </td>
+            <td style="border: 0; width: 46px; padding: 0; padding-left: 10px;">
+                <label for="heightenable" style="margin-right: 7px;"><i class="fa-solid fa-check"></i><input type="checkbox" id="heightenable" onchange="generate(), heightenable()"></label>
+            </td>
+            <td style="border: 0; width: 201px; padding: 0;">
+                Height:<br>
+                <input type="number" id="cellheight" style="border-radius: 8px 0 0 8px;" placeholder="#" disabled onkeyup="generate()"><span id="px3">px</span><button onclick="heightup(), generate()" style="padding: 7px; width: 31px; margin-left: 7px; color: #b6b9bb;" id="heightup" disabled><i class="fa-solid fa-plus"></i></button><button onclick="heightdown(), generate()" style="padding: 7px; width: 31px; margin-left: 7px; color: #b6b9bb;" id="heightdown" disabled><i class="fa-solid fa-minus"></i></button>
+            </td>
+        </tr>
+    </table>
+
+    <h3>Border<hr style="position: relative; bottom: 10px;"></h3>
+
+    <p></p>
+
+    <table id="table2">
+        <tr>
+            <td style="border: 0; width: 46px; padding: 0;">
+                <label for="borderenable" style="margin-right: 7px;"><i class="fa-solid fa-check"></i><input type="checkbox" id="borderenable" onchange="generate(), borderenable()"></label>
+            </td>
+            <td style="border: 0; width: 201px; padding: 0; border-right: 1px solid #29343f;">
+                Size:<br>
+                <input type="number" id="bordersize" style="border-radius: 8px 0 0 8px;" placeholder="#" disabled onkeyup="generate()"><span id="px">px</span><button onclick="sizeup(), generate()" style="padding: 7px; width: 31px; margin-left: 7px; color: #b6b9bb;" id="sizeup" disabled><i class="fa-solid fa-plus"></i></button><button onclick="sizedown(), generate()" style="padding: 7px; width: 31px; margin-left: 7px; color: #b6b9bb;" id="sizedown" disabled><i class="fa-solid fa-minus"></i></button>
+            </td>
+            <td style="border: 0; width: 112px; padding: 0; padding-left: 10px; border-right: 1px solid #29343f;">
+                Style:<br>
+                <select id="borderstyle" disabled onchange="generate()"><option value="solid">Solid</option><option value="double">Double</option><option value="dotted">Dotted</option><option value="dashed">Dashed</option><option value="groove">Groove</option><option value="ridge">Ridge</option><option value="inset">Inset</option><option value="outset">Outset</option></select>
+            </td>
+            <td style="border: 0; padding: 0; padding-left: 10px;">
+                Color:<br>
+                <input type="color" id="bordercolor" disabled onchange="generate()">
+            </td>
+        </tr>
+    </table>
+
+    <h3>Extras<hr style="position: relative; bottom: 10px;"></h3>
+
+    <p><label for="nospaces" style="margin-right: 7px;"><i class="fa-solid fa-table-cells-large"></i> No spaces between cells<input type="checkbox" id="nospaces" onchange="generate(), nospaces()"></label></p>
+
+    <p style="margin-top: 30px;"><button style="margin-right: 7px;" onclick="clearinput(), cleared()"><i class="fa-regular fa-trash-can"></i> Clear</button><button id="regenerate" onclick="regenerate(), regenerated()" onmouseover="regenerateinfo1()" onmouseout="regenerateinfo2()"><i class="fa-solid fa-arrow-rotate-right"></i> Re-generate<div id="regenerateinfo"><div id="triangle"></div>Re-generates the table if it fails to generate</div></button></p>
+
+    <h2 id="previewh2"><i class="fa-regular fa-eye"></i> Preview:</h2>
+    <p style="position: relative;"><input type="checkbox" id="colorchange" onclick="colorchange()"></p>
+    <div id="table"></div>
+    <p id="bordersinfo">* The borders aren't visible in the actual table.</p>
+
+    <h2 id="codeh2"><i class="fa-solid fa-code"></i> Code:</h2>
+    <p><button onclick="select(), selected()" style="margin-right: 7px;"><i class="fa-solid fa-i-cursor"></i> Select code</button><button onclick="copy(), fadein()"><i class="fa-regular fa-clipboard"></i> Copy code</button></p>
+    <div id="code"></div>
+
+    <div id="notif"></div>
+</body>
+</html>
