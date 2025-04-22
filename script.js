@@ -207,18 +207,6 @@ function selected(){
     }
 }
 
-function regenerateinfo1(){
-    timeout = setTimeout(function(){       
-        document.getElementById("regenerateinfo").style.opacity=1;
-        document.getElementById("triangle").style.opacity=1;
-    }, 500);
-}
-function regenerateinfo2(){
-    document.getElementById("regenerateinfo").style.opacity=0;
-    document.getElementById("triangle").style.opacity=0;
-    clearTimeout(timeout);
-}
-
 function borderenable(){
     const status = document.getElementById("borderenable");
     const size = document.getElementById("bordersize");
